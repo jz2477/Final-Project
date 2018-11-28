@@ -88,3 +88,15 @@ def info_crit(qpi, qlam, K, data):
     DIC = -2 * elpd_DIC
     WAIC = -2 * (lppd - p_WAIC)
     return DIC, WAIC, lppd, post_prob
+
+# AIC
+def AIC_calc(pi, lam, K, data):
+    pi_EM = tf.constant(np.array(pi, ndmin=2))
+    lam_EM = tf.constant(np.array(lam, ndmin=2))
+    elpd_AIC = 0
+    for i in range(31):
+        log_EM, _ = calc_prob(pi_EM, lam_EM, np.float64(i), 1, K)
+        elpd_AIC += log_EM * data.count(i)
+    elpd_AIC -= 2 * K
+    AIC = -2 * elpd_AIC
+    return AIC
