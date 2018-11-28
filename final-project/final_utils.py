@@ -89,6 +89,7 @@ def info_crit(qpi, qlam, K, data):
     WAIC = -2 * (lppd - p_WAIC)
     return DIC, WAIC, lppd, post_prob
 
+
 # AIC
 def AIC_calc(pi, lam, K, data):
     pi_EM = tf.constant(np.array(pi, ndmin=2))
